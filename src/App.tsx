@@ -13,7 +13,7 @@ type action = {
   val: string
 }
 
-const App: FC = (props: any) => {
+const App: FC = () => {
   const changeToken = (state: {} = getItem('info'), action: action) => {
     const { type } = action
     if (type === 'logout') {
@@ -53,11 +53,11 @@ const App: FC = (props: any) => {
             // )}
             >
               <CSSTransition
-                timeout={10000}
+                timeout={1000}
                 classNames="fade"
                 //@ts-ignore
 
-                key={location.key}
+                key={location.pathname}
               >
                 <Switch >
                   <Route path="/login" component={Login} ></Route>
