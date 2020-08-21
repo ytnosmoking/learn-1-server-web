@@ -1,0 +1,42 @@
+.music-content {
+  .lists {
+    display: flex;
+    justify-content: space-around;
+    // align-items: center;
+    flex-wrap: wrap;
+
+    li {
+      width: calc(50% - 20px);
+
+      transition: all .3s ease;
+
+      &:hover {
+        box-shadow: 10px 10px 5px #888888;
+
+        &:nth-child(2n) {
+          box-shadow: -10px 10px 5px #888888;
+        }
+      }
+
+      &:nth-child(n+3) {
+        margin-top: 10px;
+      }
+
+      img {
+        width: 300px;
+      }
+
+      h3 {
+        .flex-center();
+        justify-content: space-between;
+      }
+
+      .comment {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding-right: 20px;
+      }
+    }
+  }
+}

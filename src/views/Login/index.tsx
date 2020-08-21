@@ -20,6 +20,7 @@ const Login: FC = (props: any) => {
     if (res.status === 200) {
       const val = { ...res.info, token: res.token }
       dispatch({ val, type: 'login' })
+
       props.history.push({ pathname: '/index' })
 
     } else {
@@ -55,7 +56,8 @@ const Login: FC = (props: any) => {
       props.history.push('/index')
     }
     return () => { }
-  })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return <div className="h100 login-view ">
     <Form
       className="login-form"

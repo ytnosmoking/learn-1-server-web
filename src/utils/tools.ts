@@ -1,5 +1,5 @@
-const parse = (key: string | null | undefined) => {
-  return key && key !== "undefined" ? JSON.parse(key) : {};
+const parse = (val: string | null | undefined) => {
+  return val && val !== "undefined" ? JSON.parse(val) : "";
 };
 const strinify = (val: string | {}) => JSON.stringify(val);
 export const getItem = (key: string = "info") => {

@@ -1,6 +1,5 @@
 import React, { useReducer, FC, memo } from 'react'
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
-import Login from 'views/Login'
+
 import Layout from 'components/Layout';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
@@ -12,69 +11,33 @@ type action = {
   type: string
   val: string
 }
-
+const changeToken = (state: {} = getItem('info'), action: action) => {
+  const { type } = action
+  if (type === 'logout') {
+    setItem('info', {})
+    return {}
+  }
+  if (type === 'login') {
+    console.log(action)
+    setItem('info', action.val)
+    return action.val
+  }
+  return state
+}
 const App: FC = () => {
-  const changeToken = (state: {} = getItem('info'), action: action) => {
-    const { type } = action
-    if (type === 'logout') {
-      setItem('info', {})
-      return {}
-    }
-    if (type === 'login') {
-      console.log(action)
-      setItem('info', action.val)
-      return action.val
-    }
-    return state
-  }
-
   const [state, dispatch] = useReducer(changeToken, getItem('info'))
-  // console.log(props)
-  // // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const { location, history } = props
-  // // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const ANIMATION_MAP = {
-    PUSH: 'forward',
-    POP: 'back'
-  }
+
   return (
     <TokenContext.Provider value={state}>
       <DispatchContext.Provider
         value={dispatch}>
-        <Route render={({ location, history }) => {
-          console.log(location);
-          console.log(history);
-          return (
-            <TransitionGroup className="h100 trans-cont"
-            // childFactory={child => React.cloneElement(
-            //   child,
-            //   // @ts-ignore
-            //   { classNames: ANIMATION_MAP[history.action] }
-            // )}
-            >
-              <CSSTransition
-                timeout={1000}
-                classNames="fade"
-                //@ts-ignore
-
-                key={location.pathname}
-              >
-                <Switch >
-                  <Route path="/login" component={Login} ></Route>
-                  <Route path="/index" component={Layout} ></Route>
-
-                  <Redirect from="*" to={
-                    // @ts-ignore
-                    state?.token ? '/index' : '/login'}></Redirect>
-                </Switch>
-              </CSSTransition>
-            </TransitionGroup>
-          )
-        }}>
-        </Route>
+        {/* {TransRoute} */}
+        <Layout
+          //@ts-ignore
+          info={state} />
       </DispatchContext.Provider>
     </TokenContext.Provider>
   );
 }
 
-export default App
+export default memo(App)
