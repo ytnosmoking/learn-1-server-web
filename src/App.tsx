@@ -6,6 +6,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import { TokenContext, DispatchContext } from "utils/context";
 import { getItem, setItem } from 'utils/tools'
+import './mock'
 
 type action = {
   type: string

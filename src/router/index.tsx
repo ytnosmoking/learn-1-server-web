@@ -54,6 +54,43 @@ export const routes = [
     meta: {
       title: 'Grid'
     }
+  },
+  {
+    pathname: '/button',
+    component: LoadView('Button'),
+    meta: {
+      title: 'Button'
+    }
+  },
+  {
+    pathname: '/game',
+    component: LoadView('Game'),
+    meta: {
+      title: 'Game'
+    },
+    children: [
+      {
+        pathname: '/game/sudoku',
+        component: LoadView('Game/Sudoku'),
+        meta: {
+          title: 'Game - 数独'
+        }
+      },
+      {
+        pathname: '/game/sudoku-2',
+        component: LoadView('Game/Sudoku2'),
+        meta: {
+          title: 'Game - 数独2'
+        }
+      },
+      {
+        pathname: '/game/sudoku-3',
+        component: LoadView('Game/Sudoku3'),
+        meta: {
+          title: 'Game - 数独3'
+        }
+      }
+    ]
   }
 
 ]

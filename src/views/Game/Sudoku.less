@@ -1,0 +1,92 @@
+.sudoku {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  .btn {
+    margin-bottom: 20px;
+  }
+
+  .cont {
+
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-gap: 10px;
+    grid-template-rows: repeat(3, 200px);
+
+    &>div {
+      height: 100%;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 30%);
+      grid-gap: 10px;
+      grid-template-rows: repeat(3, 30%);
+
+      &>div {
+        border: 1px solid #000;
+        font-size: 30px;
+        .flex-center()
+      }
+    }
+  }
+
+  .cont2 {
+
+    width: 500px;
+    height: 500px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &>div {
+      // height: 20px;
+      display: flex;
+      justify-content: space-between;
+      .trans();
+
+      &:hover {
+        box-shadow: 0 0 10px #000;
+      }
+
+      &>div {
+        width: 50px;
+        border: 1px solid #000;
+        font-size: 30px;
+        .flex-center();
+        .trans();
+
+        &:hover {
+          transform: scale(1.5);
+          box-shadow: 0 0 10px #000;
+        }
+      }
+    }
+
+
+
+
+    .keyboard {
+      background-color: #fff;
+      position: absolute;
+      display: grid;
+      padding: 10px;
+      grid-template-columns: repeat(3, 50px);
+      grid-template-rows: repeat(3, 50px);
+      grid-gap: 10px;
+      font-size: 30px;
+      color: lightblue;
+      border: 1px solid #000;
+
+      span {
+        border: 1px solid #000;
+        width: 100%;
+        justify-self: center;
+        align-self: center;
+        text-align: center;
+      }
+    }
+  }
+}

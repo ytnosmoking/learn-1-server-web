@@ -40,7 +40,7 @@ const Base: FC = (props: any | Props) => {
   }
 
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const getInfos = async () => {
     const res: any = await postData(API.infos)
     console.log(res)
@@ -65,7 +65,6 @@ const Base: FC = (props: any | Props) => {
     }
     return <Header className="header" >
       <div>
-        {/* <Button onClick={getInfos} type="primary"> get more infos</Button> */}
         <span>{info?.nickname}</span>
       </div>
       <div>
@@ -104,7 +103,9 @@ const Base: FC = (props: any | Props) => {
 
   // 历史栏
   const routeHistory = useMemo(() => {
-
+    if (!info.token) {
+      return
+    }
     return <div className="history-cont">
       <div className={`history ${histroyOpen ? 'active' : ''}`}>
         {hisRoute.map((route: any, index: number) =>
@@ -135,7 +136,7 @@ const Base: FC = (props: any | Props) => {
       }
       {/* <Button className="toggle-history" icon={<UpOutlined />}></Button> */}
     </div>
-  }, [hisRoute, histroyOpen, props.history, props.location.pathname])
+  }, [hisRoute, histroyOpen, info.token, props.history, props.location.pathname])
 
   //location 变化时 监听 是否token还有  没有 就跳转login
   useEffect(() => {

@@ -1,6 +1,6 @@
 import React, { FC, useState, useMemo } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom'
-import { Button } from 'antd'
+import { Switch, Route } from 'react-router-dom'
+
 import { routes } from 'router/index'
 
 
@@ -14,10 +14,7 @@ const About: FC = (props: any) => {
     }
     return []
   }, [baseRoute, props.match.path])
-  const testBtn = useMemo(() => {
-    console.log(111)
-    return <Button type="primary">this is About</Button>
-  }, [])
+
 
   return <Switch >
     {getRoutes.map(route => {
