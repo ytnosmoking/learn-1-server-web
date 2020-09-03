@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 import { routes } from 'router/index'
 
 
-const About: FC = (props: any) => {
+const SwitchView: FC = (props: any) => {
   const [baseRoute] = useState(routes || [])
   console.log(props)
   const getRoutes = useMemo(() => {
@@ -27,4 +27,4 @@ const About: FC = (props: any) => {
 
 }
 
-export default About
+export default SwitchView

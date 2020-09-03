@@ -1,8 +1,9 @@
 import React, { FC, useState, memo, useMemo, useCallback } from 'react';
-import { Button, Tooltip, Drawer, Tag, Divider } from 'antd'
-import { getData } from 'utils/service'
+import { Button, Tooltip, Drawer, Tag, Divider, Row } from 'antd'
+import { getData, postData } from 'utils/service'
 import { API } from 'config/url'
 import './index.less'
+
 
 type content = {
   all_rate: string,
@@ -54,6 +55,11 @@ const Music: FC = (props: any) => {
     }
   }
 
+  const getClound = async () => {
+    const res: any = await getData('/?type=playlist&id=309390784')
+    console.log(res)
+  }
+
   // 颜色值
   const filterColor = useCallback((val: string) => {
     console.log('update - music -filterColor')
@@ -69,6 +75,7 @@ const Music: FC = (props: any) => {
     return `rgb(${rgb.join(",")})`
   }, [])
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const SlideDrawer = memo((props: lists) => {
     return <Drawer
       title={props?.lists?.name}
@@ -131,7 +138,11 @@ const Music: FC = (props: any) => {
   }, [filterColor, lists])
 
   return <div className="music-content">
-    <Divider> <Button type="primary" onClick={getMovie}>get Music</Button></Divider>
+    <Row align="middle" justify="space-between">
+      <Button type="primary" onClick={getMovie}>get Music</Button>
+      <Button type="primary" onClick={getClound}>get Clound Music</Button>
+    </Row>
+    <Divider></Divider>
     {musicLists}
 
     {/* <SlideDrawer lists={selectList} visible={visible} close={() => setVisible(false)} ></SlideDrawer> */}

@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react';
-import { Button, InputNumber } from 'antd'
+import { Button } from 'antd'
 import './Sudoku.less'
 
 
-const randomVal = (min: number, max: number) => Math.round(Math.random() * (max - min) + min)
+
 const randomIndex = (max: number) => Math.floor(Math.random() * max)
 
 const base = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -13,25 +13,12 @@ const base = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 // }
 const Sudoku2: FC = () => {
   const [arr, setArr] = useState([...Array(9).fill(1).map(((item, index) => {
-    let arr = [...base], inArr = []
+    let arr = [...base];
     return Array(9).fill(1).map((jtem, jndex) => {
       return arr.splice(randomIndex(arr.length), 1)[0]
     })
   }))])
 
-  const defaultArr = [
-    ...Array(9).fill(0).map(item => Array(9).fill(0))
-  ]
-  console.log(defaultArr)
-
-  const onChange = (index: number, jIndex: number, e: any) => {
-    console.log(index, jIndex)
-    console.log(e)
-    // @ts-ignore
-    arr[index][jIndex - 1] = e
-    // setArr(arr)
-  }
-  const getRandom = (arr: number[], len: number) => arr[Math.floor(Math.random() * len)]
 
   function generateArr() {
     var arr: number[][] = [];
@@ -50,6 +37,7 @@ const Sudoku2: FC = () => {
    * @param {} m
    * @return {}
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function random(n: number, m: number) {
     var c = m - n + 1;
     return Math.floor(Math.random() * c + n);
@@ -126,15 +114,16 @@ const Sudoku2: FC = () => {
    * @param {} row
    * @param {} col
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function checkDiagonalLeftToRight(arr: number[][], row: number, col: number) {
-    if (row != col) {
+    if (row !== col) {
       return true;
     }
     for (var i = 0; i < 8; i++) {
-      if (i == row) {
+      if (i === row) {
         continue;
       }
-      if (arr[i][i] == arr[row][col]) {
+      if (arr[i][i] === arr[row][col]) {
         return false;
       }
     }
@@ -147,15 +136,16 @@ const Sudoku2: FC = () => {
    * @param {} row
    * @param {} col
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function checkDiagonalRightToLeft(arr: number[][], row: number, col: number) {
-    if ((row + col) != 8) {
+    if ((row + col) !== 8) {
       return true;
     }
     for (var i = 0; i < 8; i++) {
-      if (i == row) {
+      if (i === row) {
         continue;
       }
-      if (arr[i][8 - i] == arr[row][col]) {
+      if (arr[i][8 - i] === arr[row][col]) {
         return false;
       }
     }
@@ -211,9 +201,9 @@ const Sudoku2: FC = () => {
     const end = Date.now()
     setArr(arr)
     console.log(`total---${end - start}`)
-    var result = "";
-    for (var i = 0; i < 9; i++) {
-      for (var j = 0; j < 9; j++) {
+    let result = "";
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
         result += arr[i][j];
       }
       result += "\n";
@@ -225,7 +215,8 @@ const Sudoku2: FC = () => {
   }
 
   return <div className="sudoku">
-    <Button onClick={checkBtn}>checkBtn</Button>
+
+    <Button onClick={checkBtn}>这个好像计算过滤有问题</Button>
     <div className="cont2">
       {arr.map((item: any, index: number) => {
         return <div key={index}>

@@ -1,0 +1,112 @@
+.move-image {
+  .flex-center();
+  justify-content: center;
+
+  .btn {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    &>button {
+      margin-right: 50px;
+      position: relative;
+    }
+
+    #img-upload {
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+  }
+
+  .cont {
+
+    position: relative;
+    // z-index: 2;
+
+
+    canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    &.innerImgs {
+      width: 602px;
+      height: 602px;
+      box-sizing: content-box;
+      border: 2px solid #000;
+      border-radius: 4px;
+
+      img {
+        // width: 200px;
+        // height: 200px;
+        position: absolute;
+        // width: calc(100% / 3);
+        // height: calc(100% / 3);
+        transition: all .3s ease;
+        z-index: 2;
+        border: 1px solid #fff;
+      }
+    }
+
+  }
+
+
+
+
+  .show {
+    display: inline-block;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    position: absolute;
+    top: 60px;
+    left: 40px;
+
+    &.show-big {
+
+      left: 260px;
+      width: 400px;
+      height: 400px;
+      transition: all .3s ease;
+      opacity: 0;
+      z-index: -100;
+
+      &>img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: auto;
+        height: auto;
+      }
+    }
+
+    &>img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .move {
+      width: 100px;
+      height: 100px;
+      background: #000;
+      opacity: .5;
+      position: absolute;
+      display: none;
+      left: 0px;
+      top: 0px;
+    }
+
+  }
+
+
+}

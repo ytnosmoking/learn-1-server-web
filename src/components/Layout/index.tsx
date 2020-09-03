@@ -1,6 +1,6 @@
 import React, { FC, useContext, useCallback, memo, useMemo, useState, useEffect } from 'react';
 import SiderBar from 'components/SiderBar'
-import { Layout, Button, message, Tooltip } from 'antd';
+import { Layout, Button, message, Tooltip, Image } from 'antd';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { LeftOutlined, RightOutlined, DownOutlined, UpOutlined, LogoutOutlined, CloseOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
@@ -68,7 +68,8 @@ const Base: FC = (props: any | Props) => {
         <span>{info?.nickname}</span>
       </div>
       <div>
-        <img src={info?.avator} alt="" />
+        {/* <img src={info?.avator} alt="" /> */}
+        <Image src={info?.avator} />
         <Button danger type="primary" onClick={logOut}
           icon={<LogoutOutlined />}
         > 退出</Button>

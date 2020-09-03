@@ -1,6 +1,7 @@
 import React, { memo, FC, useCallback, useMemo, useState } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { Menu } from 'antd'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Menu, Tooltip } from 'antd'
 import { routes } from 'router/index'
 
 const { SubMenu } = Menu
@@ -16,7 +17,19 @@ const SiderBar: FC = (props: any) => {
         </SubMenu>
       }
       return <Menu.Item key={route.pathname}>
-        <Link to={route}>{route.meta.title}</Link>
+
+
+        {/* <Tooltip placement="right" color="#000" title={
+          <span style={{ color: '#fff' }}>
+            {route.meta.title}
+          </span>
+        }> */}
+        <Link to={route}>
+          {route.meta.title}
+
+        </Link>
+        {/* </Tooltip> */}
+
       </Menu.Item>
     })
   }, [])

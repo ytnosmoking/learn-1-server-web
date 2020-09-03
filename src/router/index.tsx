@@ -1,6 +1,6 @@
 
 
-import LoadView from 'components/LoadAble'
+import LoadView, { LoadComponent } from 'components/LoadAble'
 
 export const routes = [
   {
@@ -19,15 +19,25 @@ export const routes = [
   },
   {
     pathname: '/set',
-    component: LoadView('Set'),
+    // component: LoadView('Set'),
+    component: LoadComponent('Switch'),
     meta: {
       title: '设置'
-    }
+    },
+    redirect: '/set/userinfo',
+    children: [
+      {
+        pathname: '/set/userinfo',
+        component: LoadView('Set/userInfo'),
+        meta: {
+          title: '用户信息'
+        }
+      },]
   },
   {
     pathname: '/about',
     redirect: '/about/why',
-    component: LoadView('About'),
+    component: LoadComponent('Switch'),
     meta: {
       title: 'About'
     },
@@ -64,7 +74,7 @@ export const routes = [
   },
   {
     pathname: '/game',
-    component: LoadView('Game'),
+    component: LoadComponent('Switch'),
     meta: {
       title: 'Game'
     },
@@ -80,7 +90,7 @@ export const routes = [
         pathname: '/game/sudoku-2',
         component: LoadView('Game/Sudoku2'),
         meta: {
-          title: 'Game - 数独2'
+          title: 'Game - 完成'
         }
       },
       {
@@ -89,9 +99,33 @@ export const routes = [
         meta: {
           title: 'Game - 数独3'
         }
-      }
+      },
+      {
+        pathname: '/game/move-image',
+        component: LoadView('Game/MoveImage'),
+        meta: {
+          title: 'Game - 切割移动图片'
+        }
+      },
     ]
-  }
+  },
+  {
+    pathname: '/mock',
+    component: LoadComponent('Switch'),
+    redirect: '/mock/img',
+    meta: {
+      title: 'MOCK'
+    },
+    children: [
+      {
+        pathname: '/mock/img',
+        component: LoadView('Mock/MockImg'),
+        meta: {
+          title: 'Mock - 图片'
+        }
+      },
+    ]
+  },
 
 ]
 

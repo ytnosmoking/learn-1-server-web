@@ -1,0 +1,51 @@
+.mock {
+  overflow-y: scroll;
+
+  .imgs {
+
+    // display: flex;
+    // flex-direction: column;
+    // flex-wrap: wrap;
+    // display: flex;
+    // justify-content: space-around;
+    text-align: center;
+
+    &>div {
+
+      width: 200px;
+      display: inline-block;
+      vertical-align: top;
+
+      .single-img {
+        position: relative;
+        border: 1px solid #000;
+
+        &:hover {
+          .single-img-delete {
+            z-index: 2;
+            opacity: 1;
+            font-size: 30px;
+            transform: translateX(50%) translateY(-50%) rotateZ(180deg);
+          }
+
+        }
+
+        &-delete {
+          position: absolute;
+          right: 0;
+          top: 0;
+
+          opacity: 0;
+          transition: all .3s ease;
+          transform-origin: center center;
+          transform: translateX(50%) translateY(-50%);
+        }
+      }
+
+      .ant-image,
+      img {
+        width: 100%
+      }
+    }
+  }
+}

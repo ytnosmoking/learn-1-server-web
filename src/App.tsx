@@ -6,11 +6,11 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import { TokenContext, DispatchContext } from "utils/context";
 import { getItem, setItem } from 'utils/tools'
-import './mock'
+// import './mock'
 
 type action = {
   type: string
-  val: string
+  val: any
 }
 const changeToken = (state: {} = getItem('info'), action: action) => {
   const { type } = action
@@ -22,6 +22,11 @@ const changeToken = (state: {} = getItem('info'), action: action) => {
     console.log(action)
     setItem('info', action.val)
     return action.val
+  }
+  if (type === 'update') {
+    const newVal = { ...state, ...action.val }
+    setItem('info', newVal)
+    return newVal
   }
   return state
 }

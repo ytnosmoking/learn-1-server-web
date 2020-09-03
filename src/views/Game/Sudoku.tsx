@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react';
-import { Button, InputNumber } from 'antd'
+
 import './Sudoku.less'
 
 
-const randomVal = (min: number, max: number) => Math.round(Math.random() * (max - min) + min)
+
 const randomIndex = (max: number) => Math.floor(Math.random() * max)
 
 const base = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -12,19 +12,12 @@ const base = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 //   [key: string | number]: any
 // }
 const Sudoku: FC = () => {
-  const [arr, setArr] = useState([...Array(9).fill(1).map(((item, index) => {
-    let arr = [...base], inArr = []
+  const [arr] = useState([...Array(9).fill(1).map(((item, index) => {
+    let arr = [...base];
     return Array(9).fill(1).map((jtem, jndex) => {
       return arr.splice(randomIndex(arr.length), 1)[0]
     })
   }))])
-  const onChange = (index: number, jIndex: number, e: any) => {
-    console.log(index, jIndex)
-    console.log(e)
-    // @ts-ignore
-    arr[index][jIndex - 1] = e
-    // setArr(arr)
-  }
 
   return <div className="sudoku">
     <div className="cont">
