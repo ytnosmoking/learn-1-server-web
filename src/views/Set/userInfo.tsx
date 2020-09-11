@@ -1,7 +1,7 @@
 import React, { FC, useState, useContext } from 'react';
 import { UserOutlined } from '@ant-design/icons'
 import { Button, Form, Input, Avatar, message } from 'antd'
-import { getItem, setItem } from 'utils/tools'
+import { getItem } from 'utils/tools'
 import './userInfo.less'
 import { postData } from 'utils/service';
 import { DispatchContext } from "utils/context";

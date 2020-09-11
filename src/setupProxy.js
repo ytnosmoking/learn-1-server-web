@@ -29,6 +29,13 @@ module.exports = function (app) {
       pathRewrite: {
         "^/cloundMusic": "",
       },
+    }),
+    createProxyMiddleware("/kugou", {
+      target: "http://mobilecdnbj.kugou.com/api",
+      changeOrigin: true,
+      pathRewrite: {
+        "^/kugou": "",
+      },
     })
   );
 };

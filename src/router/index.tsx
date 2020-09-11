@@ -12,10 +12,25 @@ export const routes = [
   },
   {
     pathname: '/music',
-    component: LoadView('Music'),
+    component: LoadComponent('Switch'),
+
     meta: {
       title: 'Music'
-    }
+    },
+    children: [
+      {
+        pathname: '/music/index',
+        component: LoadView('Music'),
+        meta: {
+          title: '基本音乐'
+        }
+      }, {
+        pathname: '/music/kugou',
+        component: LoadView('Music/kugo'),
+        meta: {
+          title: '酷狗音乐'
+        }
+      },]
   },
   {
     pathname: '/set',

@@ -1,4 +1,5 @@
 import service from "./axios";
+import { kugoUrl } from "config/url";
 export const getData = (url: string, params?: any) => {
   return service.request({
     url,
@@ -19,4 +20,19 @@ export const getById = (url: string, id: string | number, params?: any) => {
     params,
     method: "get",
   });
+};
+
+export const getFetch = async (url: string, params: any = {}) => {
+  const keys = Object.keys(params);
+
+  const keysLink = keys.reduce((pre, cur) => {
+    return pre + cur + "=" + params[cur] + "&";
+  }, "?");
+  const res = await fetch(kugoUrl + url + keysLink, {
+    method: "GET",
+  });
+
+  console.log(res);
+  // const result = await res.json();
+  return res;
 };

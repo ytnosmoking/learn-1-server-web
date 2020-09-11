@@ -1,8 +1,8 @@
-import React, { FC, useState, memo, useMemo, useCallback } from 'react';
-import { Button, Tooltip, Drawer, Tag, Divider, Row } from 'antd'
-import { getData } from 'utils/service'
-import { API } from 'config/url'
-import './index.less'
+import React, { FC, useState, memo, useMemo } from 'react';
+import { Button, Drawer, Tag, Divider, Image, Row } from 'antd'
+import { getFetch } from 'utils/service'
+import { KugoApi } from 'config/url'
+import './kugo.less'
 
 
 type content = {
@@ -40,36 +40,43 @@ type lists = {
 }
 
 
-const Music: FC = (props: any) => {
+const KuGou: FC = (props: any) => {
   console.log('Music')
   const [lists, setlists] = useState<any[]>([])
   const [visible, setVisible] = useState(false);
   const [selectList, setSetList] = useState<any>({})
 
-  // 获取数据
-  const getMovie = async () => {
-    const res: any = await getData(API.movie)
+
+  const getClound = async () => {
+    const response = await getFetch(
+      KugoApi.category,
+      {
+        pid: 0,
+        apiver: 2,
+        plat: 0
+      }
+    )
+    const res = await response.json()
     console.log(res)
-    if (res.code === 200) {
-      setlists(res.result)
-    }
+    setlists(res.data.info)
+  }
+  const getHot = async () => {
+    const response = await getFetch(
+      KugoApi.hot,
+      {
+        showtype: 3,
+        apiver: 2,
+        plat: 0
+      }
+    )
+    const res = await response.json()
+    console.log(res)
+    setlists(res.data.info)
   }
 
 
-  // 颜色值
-  const filterColor = useCallback((val: string) => {
-    console.log('update - music -filterColor')
-    let str = val.replace(/^0x([0-9a-fA-f]{2})([0-9a-fA-f]{2})([0-9a-fA-f]{2})/, '$1,$2,$3')
-    const strArr = str.split(',')
-    const rgb = strArr.reduce((pre: number[], cur) => {
-      if (cur) {
-        return [...pre, parseInt(`0x${cur}`)]
-      } else {
-        return pre
-      }
-    }, [])
-    return `rgb(${rgb.join(",")})`
-  }, [])
+
+
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const SlideDrawer = memo((props: lists) => {
@@ -112,30 +119,23 @@ const Music: FC = (props: any) => {
     return <ul className="lists">
       {
         lists?.map((list: any, index: number) => {
-          return <li key={index} style={{
-            backgroundColor: filterColor(list.bg_color),
-          }}>
-            <img src={list.bg_pic} alt="" />
-            <h3 style={{ color: filterColor(list.color) }}>
+          return <li key={index} onClick={() => checkList(list)} >
+            <img src={list.icon || list.bannerurl} alt="" />
+            <h3 >
               <span>
                 {list.name}
               </span>
-              <Button type="text" danger onClick={() => checkList(list)}>
-                查看
-          </Button>
             </h3>
-            <Tooltip title={list.comment}>
-              <div className="comment">{list.comment}</div>
-            </Tooltip>
           </li>
         })
       }
     </ul>
-  }, [filterColor, lists])
+  }, [lists])
 
   return <div className="music-content">
-    <Row align="middle" justify="space-between">
-      <Button type="primary" onClick={getMovie}>get Music</Button>
+    <Row align="middle" justify="start">
+      <Button type="primary" onClick={getClound}>所有分类</Button>
+      <Button type="primary" onClick={getHot}>热门分类</Button>
     </Row>
     <Divider></Divider>
     {musicLists}
@@ -150,19 +150,13 @@ const Music: FC = (props: any) => {
     >{
         console.log(1)
       }
-      {selectList?.content?.map((list: any, index: number) => {
+      {selectList?.children?.map((list: any, index: number) => {
         return <div key={index}>
-          <Divider plain>歌名: {list.title}</Divider>
-          <p>标识: {list.biaoshi.split(',')
-            .map((tag: any, tIndex: number) =>
-              <Tag key={tIndex}>{tag}</Tag>)}</p>
-          <p>专辑:{list.album_title}</p>
-          {
-            list.rank_change !== '0' && <p>{list.rank_change > 0 ? '上升' : '下降'} {list.rank_change}</p>
-          }
-          <img style={{ width: '100%' }} src={list.pic_big} alt="" />
-          <p>累计播放量:{list.all_rate}</p>
-          <p>作者:{list.author}</p>
+          <Divider plain> {list.name}</Divider>
+          {list.bannerurl && <Image src={list.bannerurl} />}
+          {list.icon && <Image src={list.icon} />}
+          {list.imgurl && <Image src={list.imgurl} />}
+          {list.jump_url && <a href={list.jump_url} target="blank">jump</a>}
         </div>
       })}
     </Drawer>
@@ -171,4 +165,4 @@ const Music: FC = (props: any) => {
 }
 
 
-export default memo(Music)
+export default memo(KuGou)

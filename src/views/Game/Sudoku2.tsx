@@ -1,7 +1,7 @@
-import React, { FC, useState, useEffect, useRef } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { Button, message } from 'antd'
 import './Sudoku.less'
-import { count } from 'console';
+
 
 
 
@@ -210,10 +210,7 @@ const Sudoku2: FC = () => {
 
   return <div className="sudoku" onClick={() => setKeyboard(false)}>
     <div className="btn">
-      {/* <Button danger onClick={() => {
-        setArr(initArr())
-      }}>resetCheck</Button> */}
-      {/* <Button type="primary" onClick={() => setArr(arr)}> 关闭答案</Button> */}
+
       <Button type="primary" loading={isLoad} onClick={checkBtn}>Next</Button>
       <Button type="primary" danger onClick={checkAnswer}> {isCheck ? '关闭' : '查看'}答案</Button>
       <Button type="primary" danger > 错误次数{errCounts}</Button>

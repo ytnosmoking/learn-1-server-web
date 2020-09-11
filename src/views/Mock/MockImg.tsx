@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, useRef, useLayoutEffect } from 'react';
+import React, { FC, useState, useEffect, useRef } from 'react';
 import { CloseCircleOutlined } from '@ant-design/icons'
 import { Image as AnImage, Button, message, Row } from 'antd'
 import { postData, getData } from 'utils/service'

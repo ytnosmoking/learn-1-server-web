@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState, useEffect } from 'react';
 
-import { Image, Button, Radio,Row } from 'antd'
+import {  Button, Radio,Row } from 'antd'
 import './MoveImage.less'
 import img from '../../assets/img/timg.jpeg'
 
